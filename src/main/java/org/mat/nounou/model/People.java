@@ -1,11 +1,18 @@
 package org.mat.nounou.model;
 
+import java.util.Collection;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.sun.istack.NotNull;
 
@@ -42,9 +49,11 @@ public class People {
 	    private long positiveRatings;
 	    @Column(name = "pic_url_1")
 	    private String picUrl1; 
-	    @Column(name = "sexual_preference")
+	    @JoinColumn(name = "sexual_preference", referencedColumnName = "symbol")
+	    @ManyToOne
 	    private Sexes sexualPreference;
-	    @Column(name = "sex")
+	    @JoinColumn(name = "sex", referencedColumnName = "symbol")
+	    @ManyToOne
 	    private Sexes sex;
 	
 	    public People() {
