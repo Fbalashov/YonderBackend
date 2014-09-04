@@ -1,1 +1,1 @@
-mvn exec:java -Dexec.mainClass="org.mat.Main" 
+mvn exec:java -Dexec.mainClass="com.Yonder.Main" 

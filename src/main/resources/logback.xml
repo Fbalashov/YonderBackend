@@ -7,7 +7,7 @@
         </encoder>
     </appender>
 
-    <logger name="org.mat.nounou" level="DEBUG"/>
+    <logger name="com.Yonder" level="DEBUG"/>
     <logger name="org.apache" level="INFO"/>
     <logger name="org.hibernate" level="INFO"/>
     <root level="INFO">

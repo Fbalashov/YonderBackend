@@ -30,11 +30,8 @@
         <description>
             Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
         </description>
-        <class>org.mat.nounou.model.Account</class>
-        <class>org.mat.nounou.model.User</class>
-        <class>org.mat.nounou.model.Child</class>
-        <class>org.mat.nounou.model.Appointment</class>
-        <class>org.mat.nounou.model.Nurse</class>
+        <class>com.yonder.model.Sexes</class>
+        <class>com.Yonder.model.People</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>
