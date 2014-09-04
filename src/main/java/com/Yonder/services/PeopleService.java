@@ -69,7 +69,9 @@ public class PeopleService extends AbstractService<People> {
     @GET
     @Path("{id}")
     public People find(@PathParam("id") String id) {
-        return super.find(id);
+        People val = getEntityManager().find(People.class, ((String)id));
+        closeEntityManager();
+        return val;
     }
     
 
