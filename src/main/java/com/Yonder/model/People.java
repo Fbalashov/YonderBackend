@@ -1,4 +1,4 @@
-package org.mat.nounou.model;
+package com.Yonder.model;
 
 import java.util.Collection;
 

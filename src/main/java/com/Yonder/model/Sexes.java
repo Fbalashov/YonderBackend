@@ -1,4 +1,4 @@
-package org.mat.nounou.model;
+package com.Yonder.model;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;

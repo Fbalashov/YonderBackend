@@ -1,10 +1,10 @@
-package org.mat.nounou.vo;
+package com.Yonder.vo;
 
 import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 
-import org.mat.nounou.model.People;
-import org.mat.nounou.model.Sexes;
+import com.Yonder.model.People;
+import com.Yonder.model.Sexes;
 
 public class Sexes_ {
     public static volatile SingularAttribute<Sexes, String> symbol;

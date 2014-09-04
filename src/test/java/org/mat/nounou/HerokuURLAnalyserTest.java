@@ -1,7 +1,8 @@
 package org.mat.nounou;
 
 import org.junit.Test;
-import org.mat.nounou.util.HerokuURLAnalyser;
+
+import com.Yonder.util.HerokuURLAnalyser;
 
 import static org.junit.Assert.assertTrue;
 

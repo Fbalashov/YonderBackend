@@ -256,19 +256,6 @@
                                 <version>1.4</version>
                             </dependency>
 
-                            <!-- loggers adapters -->
-                            <dependency>
-                                <groupId>org.slf4j</groupId>
-                                <artifactId>log4j-over-slf4j</artifactId>
-                                <version>${slf4j.version}</version>
-                            </dependency>
-
-                            <dependency>
-                                <groupId>org.slf4j</groupId>
-                                <artifactId>jcl-over-slf4j</artifactId>
-                                <version>${slf4j.version}</version>
-                            </dependency>
-
                             <!-- effective logger impl -->
                             <dependency>
                                 <groupId>ch.qos.logback</groupId>

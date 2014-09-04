@@ -1,4 +1,4 @@
-package org.mat.nounou.util;
+package com.Yonder.util;
 
 import java.util.StringTokenizer;
 
@@ -82,12 +82,12 @@ public class HerokuURLAnalyser {
     @Override
     public String toString() {
         return "HerokuURLAnalyser{" +
-                "userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", host='" + host + '\'' +
-                ", port='" + port + '\'' +
-                ", databaseName='" + databaseName + '\'' +
-                ", dbVendor='" + dbVendor + '\'' +
-                '}';
+            "userName='" + userName + '\'' +
+            ", password='" + password + '\'' +
+            ", host='" + host + '\'' +
+            ", port='" + port + '\'' +
+            ", databaseName='" + databaseName + '\'' +
+            ", dbVendor='" + dbVendor + '\'' +
+            '}';
     }
 }

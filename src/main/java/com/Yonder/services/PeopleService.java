@@ -1,4 +1,4 @@
-package org.mat.nounou.services;
+package com.Yonder.services;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,21 +16,20 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.mat.nounou.model.People;
-import org.mat.nounou.servlets.EntityManagerLoaderListener;
-import org.mat.nounou.vo.People_;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.Yonder.model.People;
+import com.Yonder.servlets.EntityManagerLoaderListener;
+import com.Yonder.vo.People_;
 
 /**
  * Author: Fuad
  */
 
 @Path("people")
+@Produces(MediaType.APPLICATION_JSON)
 public class PeopleService extends AbstractService<People> {
 	
 	EntityManager em = null;
-    private static final Logger logger = LoggerFactory.getLogger(PeopleService.class);
 
     public PeopleService() {
         super(People.class);

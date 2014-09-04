@@ -1,7 +1,8 @@
 package org.mat.nounou;
 
 import org.junit.Test;
-import org.mat.nounou.util.Check;
+
+import com.Yonder.util.Check;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
