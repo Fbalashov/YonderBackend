@@ -23,22 +23,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Value Object for Appointment
- * AppointmentVO: mlecoutre
- * Date: 28/10/12
- * Time: 11:13
+ * Author: Fuad
  */
 
 @Path("people")
-@Produces(MediaType.APPLICATION_JSON)
 public class PeopleService extends AbstractService<People> {
-
-    private EntityManager em;
+	
+	EntityManager em = null;
     private static final Logger logger = LoggerFactory.getLogger(PeopleService.class);
 
     public PeopleService() {
         super(People.class);
-        em = EntityManagerLoaderListener.createEntityManager();
     }
 
     @POST
@@ -82,7 +77,8 @@ public class PeopleService extends AbstractService<People> {
     @GET
     @Path("findMatch/{pref}/{id}")
     public People findMatch( @PathParam("pref") String pref, @PathParam("id") String id) {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+    	EntityManager em = getEntityManager();
+        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(People.class));
         Root<People> people = cq.from(People.class);
         //get people whose sexes match the requested preference and are active
@@ -97,7 +93,8 @@ public class PeopleService extends AbstractService<People> {
         //need to:
         //  1.filter out past matches, 
         //  2. not allow match to self
-        List<People> interests = getEntityManager().createQuery(cq).getResultList();
+        List<People> interests = em.createQuery(cq).getResultList();
+        em.close();
         Collections.shuffle(interests);
         return interests.get(0);
     }
@@ -138,9 +135,14 @@ public class PeopleService extends AbstractService<People> {
 
     @Override
     protected EntityManager getEntityManager() {
+    	em = EntityManagerLoaderListener.createEntityManager();
         return em;
-    }
+    }  
     
+    @Override
+    protected void closeEntityManager() {
+    	em.close();
+    }
     
     @GET
     @Path("complete/{id}")	

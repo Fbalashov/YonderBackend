@@ -7,6 +7,7 @@ package org.mat.nounou.services;
  */
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 
 /**
@@ -21,27 +22,36 @@ public abstract class AbstractService<T> {
     }
 
     protected abstract EntityManager getEntityManager();
+    
+    protected abstract void closeEntityManager();
 
     public void create(T entity) {
         getEntityManager().persist(entity);
+        closeEntityManager();
     }
 
     public void edit(T entity) {
         getEntityManager().merge(entity);
+        closeEntityManager();
     }
 
     public void remove(T entity) {
         getEntityManager().remove(getEntityManager().merge(entity));
+        closeEntityManager();
     }
 
     public T find(Object id) {
-        return getEntityManager().find(entityClass, id);
+        T val = getEntityManager().find(entityClass, id);
+        closeEntityManager();
+        return val;
     }
 
     public List<T> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
-        return getEntityManager().createQuery(cq).getResultList();
+        List<T> vals = getEntityManager().createQuery(cq).getResultList();
+        closeEntityManager();
+        return vals;
     }
 
     public List<T> findRange(int[] range) {
@@ -50,7 +60,9 @@ public abstract class AbstractService<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         q.setMaxResults(range[1] - range[0] + 1);
         q.setFirstResult(range[0]);
-        return q.getResultList();
+        List<T> vals = q.getResultList();
+        closeEntityManager();
+        return vals;
     }
 
     public int count() {
@@ -58,7 +70,9 @@ public abstract class AbstractService<T> {
         javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
         cq.select(getEntityManager().getCriteriaBuilder().count(rt));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+        int count = ((Long) q.getSingleResult()).intValue();
+        closeEntityManager();
+        return count;
     }
     
 }
