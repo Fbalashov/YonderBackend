@@ -1,7 +1,10 @@
-package org.mat.nounou.model;
+package org.mat.nounou.vo;
 
 import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
+
+import org.mat.nounou.model.People;
+import org.mat.nounou.model.Sexes;
 
 public class People_ {
 	//metamodel data

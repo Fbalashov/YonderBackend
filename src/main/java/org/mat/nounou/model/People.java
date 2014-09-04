@@ -49,13 +49,6 @@ public class People {
 	    private long positiveRatings;
 	    @Column(name = "pic_url_1")
 	    private String picUrl1; 
-	    @JoinTable(name = "encounters", joinColumns = {
-	        @JoinColumn(name = "person_1_name", referencedColumnName = "username")}, inverseJoinColumns = {
-	        @JoinColumn(name = "person_2_name", referencedColumnName = "username")})
-	    @ManyToMany
-	    private Collection<People> peopleCollection;
-	    @ManyToMany(mappedBy = "peopleCollection")
-	    private Collection<People> peopleCollection1;
 	    @JoinColumn(name = "sexual_preference", referencedColumnName = "symbol")
 	    @ManyToOne
 	    private Sexes sexualPreference;
@@ -141,24 +134,6 @@ public class People {
 	
 	    public void setPicUrl1(String picUrl1) {
 	        this.picUrl1 = picUrl1;
-	    }
-	
-	    @XmlTransient
-	    public Collection<People> getPeopleCollection() {
-	        return peopleCollection;
-	    }
-	
-	    public void setPeopleCollection(Collection<People> peopleCollection) {
-	        this.peopleCollection = peopleCollection;
-	    }
-	
-	    @XmlTransient
-	    public Collection<People> getPeopleCollection1() {
-	        return peopleCollection1;
-	    }
-	
-	    public void setPeopleCollection1(Collection<People> peopleCollection1) {
-	        this.peopleCollection1 = peopleCollection1;
 	    }
 	
 	    public Sexes getSexualPreference() {

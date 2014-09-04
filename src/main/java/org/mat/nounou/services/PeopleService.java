@@ -17,8 +17,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.mat.nounou.model.People;
-import org.mat.nounou.model.People_;
 import org.mat.nounou.servlets.EntityManagerLoaderListener;
+import org.mat.nounou.vo.People_;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
