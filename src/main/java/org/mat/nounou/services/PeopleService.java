@@ -28,9 +28,9 @@ import org.slf4j.LoggerFactory;
  * Date: 28/10/12
  * Time: 11:13
  */
-@Produces(MediaType.APPLICATION_JSON)
 
 @Path("people")
+@Produces(MediaType.APPLICATION_JSON)
 public class PeopleService extends AbstractService<People> {
 
     private EntityManager em;
