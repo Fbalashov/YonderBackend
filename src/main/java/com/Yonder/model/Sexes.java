@@ -1,5 +1,7 @@
 package com.Yonder.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +20,9 @@ import com.sun.istack.NotNull;
     @NamedQuery(name = "Sexes.findAll", query = "SELECT s FROM Sexes s"),
     @NamedQuery(name = "Sexes.findBySymbol", query = "SELECT s FROM Sexes s WHERE s.symbol = :symbol"),
     @NamedQuery(name = "Sexes.findByName", query = "SELECT s FROM Sexes s WHERE s.name = :name")})
-public class Sexes {
-    @Id
+public class Sexes implements Serializable{
+	private static final long serialVersionUID = 1L;
+	@Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "symbol")

@@ -1,26 +1,24 @@
 package com.Yonder.model;
 
-import java.util.Collection;
+import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 import com.sun.istack.NotNull;
 
 @XmlRootElement
 @Entity
 @Table( name = "People")
-public class People {
-	  @Basic(optional = false)
+public class People implements Serializable{
+	private static final long serialVersionUID = 1L;
+	@Basic(optional = false)
 	    @NotNull
 	    @Column(name = "username")
 	    private String username;
@@ -70,6 +68,17 @@ public class People {
 	        this.active = active;
 	        this.anonymous = anonymous;
 	        this.positiveRatings = positiveRatings;
+	    }
+	
+	    public People(String privateKey, String username, String password, boolean active, boolean anonymous, long positiveRatings, String sex, String sexualPreference) {
+	        this.privateKey = privateKey;
+	        this.username = username;
+	        this.password = password;
+	        this.active = active;
+	        this.anonymous = anonymous;
+	        this.positiveRatings = positiveRatings;
+	        this.sex = new Sexes(sex);
+	        this.sexualPreference = new Sexes(sexualPreference);
 	    }
 	
 	    public String getUsername() {

@@ -37,9 +37,10 @@ public class PeopleService extends AbstractService<People> {
 
     @POST
     @Path("new")
-    @Consumes({"application/xml", "application/json"})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public String createNew(People entity) {
-        String privateKey = RandomStringUtils.random(50);
+    	String charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        String privateKey = RandomStringUtils.random(50, charset);
         entity.setPrivateKey(privateKey);
         super.create(entity);
         return privateKey;
@@ -48,16 +49,19 @@ public class PeopleService extends AbstractService<People> {
     @POST
     @Override
     @Path("deprecated")
-    @Consumes({"application/xml", "application/json"})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(People entity) {
         throw new NoSuchMethodError("please call this method with the addition 'differentiation' argument");
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({"application/xml", "application/json"})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") String id, People entity) {
-        super.edit(entity);
+    	if( !(find(id) == null)) {
+	    	entity.setPrivateKey(id);
+	        super.edit(entity);
+    	}
     }
 
     @DELETE
@@ -69,7 +73,7 @@ public class PeopleService extends AbstractService<People> {
     @GET
     @Path("{id}")
     public People find(@PathParam("id") String id) {
-        People val = getEntityManager().find(People.class, ((String)id));
+        People val = getEntityManager().find(People.class, id);
         closeEntityManager();
         return val;
     }
@@ -92,8 +96,8 @@ public class PeopleService extends AbstractService<People> {
         cq.where(people.get(People_.sex).in(c));
         cq.where(people.get(People_.active).in(true));
         //need to:
-        //  1.filter out past matches, 
-        //  2. not allow match to self
+        //  1. TODO: filter out past matches, 
+        //  2. TODO: not allow match to self
         List<People> interests = em.createQuery(cq).getResultList();
         em.close();
         Collections.shuffle(interests);
@@ -105,7 +109,7 @@ public class PeopleService extends AbstractService<People> {
     public People rateAndMatch(@PathParam("pref") String pref, @PathParam("rate") Boolean rate,
             @PathParam("other_person") String other_id,  @PathParam("u_id") String u_id) {
         // Do the following:
-        //  *1. add new match to match list*
+        //  1. TODO: add new match to match list
         //  2. Update ranking for other person
         if(rate){
             People other = find(other_id);
@@ -119,30 +123,20 @@ public class PeopleService extends AbstractService<People> {
     @GET
     @Override
     public List<People> findAll() {
+    	//TODO: require the user to pass their id in!!! Maybe get rid of this
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     public List<People> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+        throw new NoSuchMethodError();
     }
 
     @GET
     @Path("count")
     public String countREST() {
         return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-    	em = EntityManagerLoaderListener.createEntityManager();
-        return em;
-    }  
-    
-    @Override
-    protected void closeEntityManager() {
-    	em.close();
     }
     
     @GET
@@ -159,5 +153,16 @@ public class PeopleService extends AbstractService<People> {
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected EntityManager getEntityManager() {
+    	em = EntityManagerLoaderListener.createEntityManager();
+        return em;
+    }  
+    
+    @Override
+    protected void closeEntityManager() {
+    	em.close();
     }
 }

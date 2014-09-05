@@ -26,17 +26,40 @@ public abstract class AbstractService<T> {
     protected abstract void closeEntityManager();
 
     public void create(T entity) {
-        getEntityManager().persist(entity);
+        EntityManager em = getEntityManager();
+        em.getTransaction().begin();
+        if (!em.contains(entity)) {
+            // persist object - add to entity manager
+            em.persist(entity);
+            // flush em - save to DB
+            em.flush();
+        }
+        // commit transaction at all
+        em.getTransaction().commit();
         closeEntityManager();
     }
 
     public void edit(T entity) {
-        getEntityManager().merge(entity);
+        EntityManager em = getEntityManager();
+        em.getTransaction().begin();
+        // persist object - merge to entity manager
+        em.merge(entity);
+        // flush em - save to DB
+        em.flush();
+        // commit transaction at all
+        em.getTransaction().commit();
         closeEntityManager();
     }
 
     public void remove(T entity) {
-        getEntityManager().remove(getEntityManager().merge(entity));
+    	if(entity == null) {return;}
+    	EntityManager em = getEntityManager();
+        em.getTransaction().begin();
+    	em.remove(em.contains(entity) ? entity : em.merge(entity));
+        // flush em - save to DB
+        em.flush();
+        // commit transaction at all
+        em.getTransaction().commit();
         closeEntityManager();
     }
 
