@@ -13,10 +13,13 @@ you would query : http://immense-anchorage-4417.herokuapp.com/services/abba/dabb
 
 * Get all users in database || GET || JSON array || people
 * Add user to database, generates & returns private key || POST || Text on success|| people/new/
-* Edit user in database, generates & returns private key || POST || Text on success|| people/{{id}}
-* Get specific user from db || GET || JSON array on success, error if not found || people/{{id}}
-* Remove specific user from db || DELETE || nothing on success or error || people/{{id}}
-*
+* Edit user in database, generates & returns private key || POST || Text on success|| people/{id}
+* Get specific user from db || GET || JSON array on success, error if not found || people/{id}
+* Remove specific user from db || DELETE || nothing on success or error || people/{id}
+* Number of users in db || GET || integer || people/count
+* Discover if a user has a complete profile || GET || boolean || people/complete/{id}
+* Get a prospective match for a user || GET || JSON || people/findMatch/{sexual_preference}/{id}
+* Set rate for past match and get a new prospective match || GET || JSON || people/findMatch/{sexual_preference}/{u_id}/{other_person_id}/{rating}
 
 ## Architecture
 * Hosted on a tomcat7 in the cloud (heroku platform)
