@@ -2,6 +2,8 @@
 
 This application provides a REST endpoint for mobile devices to communicate ratings and profiles for the project Yonder application http://immense-anchorage-4417.herokuapp.com/
 
+This app was based on https://github.com/mlecoutre/nounou/ of which portions were used to deploy the embedded tomcat server and learn which dependencies to use for that purpose.
+
 ## API
 Substitute <<APP-NAME>> with immense-anchorage-4417
 Root to all requests: http://<<APP-NAME>>.herokuapp.com/services/
